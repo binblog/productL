@@ -1,4 +1,4 @@
-package httpclient;
+package http.resource.httpclient;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -18,8 +18,6 @@ public class DefaultClient {
     // Content-Type, ×´Ì¬Âë£¬ ÄÚÈÝ
 
     public void getMethod(String url) throws IOException {
-
-
         HttpGet httpGet = new HttpGet(url);
 
         execute(url, httpGet);

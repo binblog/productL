@@ -1,4 +1,4 @@
-package httpclient;
+package http.resource.httpclient;
 
 import org.junit.Test;
 
