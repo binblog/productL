@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd  ">
+
+    <!--<bean id="helloBeanProcessor" class="spring.processor.HelloBeanProcessor"></bean>-->
+    <bean class="spring.processor.InitBeanProcessors"/>
+    <bean class="spring.aware.HelloAware"/>
+    <bean class="spring.init.HelloInit"/>
+
+    <bean id="emailListener" class="spring.event.EmailListener"></bean>
+
+    <bean id="blog" class="spring.bean.Blog" >
+        <property name="title" value="hello spring" ></property>
+    </bean>
+
+
+</beans>

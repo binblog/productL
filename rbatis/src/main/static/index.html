@@ -1,0 +1,77 @@
+<html>
+    <head>
+
+        <script src="jquery-1.10.2.js"></script>
+        <script src="jquery.json.js"></script>
+
+        <script>
+
+            $(function() {
+                $("#get").click(function() {
+                    $.ajax({
+                        url: "rbatis/blog/ping",
+                        type: 'GET',
+
+                        success: function (result, textStatus, xhr) {
+                            $.dir(result);
+                        }
+                    });
+                });
+
+                $("#post").click(function() {
+                    var blog = {"title" : "hello, service"};
+
+                    var data = $.toJSON(blog);
+
+                    $.ajax({
+                        url: "rbatis/blog",
+                        type: 'POST',
+
+                        contentType: 'application/json',
+                        data: data,
+                        dataType: 'json',
+                        success: function (result) {
+                            $.dir(result);
+                        }
+                    });
+                });
+
+                $("#delete").click(function() {
+                    $.ajax({
+                        url: "rbatis/blog/1",
+                        type: 'DELETE',
+                        success:  function (result) {
+                            $.dir(result);
+                        }
+                    });
+                });
+
+                $("#put").click(function() {
+                    var blog = {"title" : "hello, I neet put"};
+
+                    var data = $.toJSON(blog);
+
+                    $.ajax({
+                        url: "rbatis/blog/1",
+                        type: 'PUT',
+
+                        contentType: 'application/json',
+                        data: data,
+                        dataType: 'json',
+                        success: function (result) {
+                            $.dir(result);
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+
+        <button id="get">get</button>
+        <button id="post">post</button>
+        <button id="delete">delete</button>
+        <button id="put">put</button>
+    </body>
+</html>
