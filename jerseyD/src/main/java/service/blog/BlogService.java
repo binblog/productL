@@ -24,8 +24,6 @@ public class BlogService {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Blog getBlog(@PathParam("id") long id) {
-        System.out.println("id is : " + id);
-
         Blog blog = new Blog();
         blog.setTitle("id is " + id);
         return blog;
@@ -35,22 +33,15 @@ public class BlogService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     public String addBlog(Blog blog) {
-        System.out.println(blog);
+        logger.info("post blog : {}", blog);
         return "post success";
-    }
-
-    @POST
-    @Path("post/test")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String postTest() {
-        return "test post success";
     }
 
     @DELETE
     @Path("{id}")
     @Produces(MediaType.TEXT_PLAIN)
     public String delete(@PathParam("id") long id) {
-        System.out.println("delete id : " + id);
+        logger.info("delete id : " + id);
 
         return "delete success";
     }

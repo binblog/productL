@@ -1,13 +1,13 @@
 package http.resource.rest;
 
-
 import java.lang.annotation.*;
 
 /**
- * Created by bin.liang on 2016/12/2.
+ * Created by bin on 2016/12/3.
  */
-@Target({ElementType.METHOD})
+
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Post {
+public @interface GET {
 }

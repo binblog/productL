@@ -1,6 +1,6 @@
 package http.resource;
 
-import example.service.BlogService;
+import http.resource.example.service.BlogService;
 import org.junit.Test;
 
 /**
@@ -16,5 +16,9 @@ public class ConfigurationTest {
 
         configuration.setPreUrl("http://localhost:8080/rbatis/");
         configuration.addClass(BlogService.class);
+
+
+        BlogService service = configuration.getResource(BlogService.class);
+        service.getBlog(1);
     }
 }
