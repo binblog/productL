@@ -9,9 +9,6 @@ import javax.ws.rs.PathParam;
  */
 @Path(value = "echo")
 public class EchoServiceImpl implements  EchoService{
-
-
-
     @GET
     @Path(value = "/{message}")
     public String echo(@PathParam("message") String message)

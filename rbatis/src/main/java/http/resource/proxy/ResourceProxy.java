@@ -1,6 +1,5 @@
 package http.resource.proxy;
 
-import http.resource.comment.HttpComment;
 import http.resource.http.HttpResource;
 import http.resource.http.HttpTransfer;
 import http.resource.http.TransferExecutor;
@@ -20,34 +19,18 @@ public class ResourceProxy implements InvocationHandler {
 
     public void setResource(HttpResource resource) {
         this.resource = resource;
-
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println("调用到了 + " + method.getName());
+
         HttpTransfer transfer = resource.getTransfer(method.getName());
 
 
         TransferExecutor executor = transfer.getExecutor();
-        executor.execute(args);
-        
 
-//        TransferExecutor executer = resource.getExecute();
 
-//        String result = executer.execute(args);
-//
-//        result hanler = executer.getresultHanlder(method);
-//
-//
-//
-//        if(result.isSuccess) {
-//            parsresult();
-//        } else {
-//            parseerro();
-//        }
-
-        return null;
+        return executor.execute(args);
     }
 }
 

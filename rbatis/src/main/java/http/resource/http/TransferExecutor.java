@@ -2,9 +2,9 @@ package http.resource.http;
 
 
 import http.resource.comment.HttpComment;
-import http.resource.http.HttpTransfer;
+import http.resource.http.media.MediaHandler;
 
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,67 +13,70 @@ import java.util.Map;
  */
 public class TransferExecutor {
 
-    private  HttpComment comment ;
+    private HttpComment comment ;
+//    private String url;
+//    private List<HttpParameter> params;
     private HttpTransfer transfer;
+
     
 
 
-    public TransferExecutor(HttpTransfer transfer ,HttpComment comment) {
+    public TransferExecutor(HttpTransfer transfer , HttpComment comment ) {
         this.comment = comment;
         this.transfer = transfer;
     }
 
-    public String execute(Object[] args) {
-        System.out.println("--- " + comment);
-
+    public Object execute(Object[] args) {
 
         String url = transfer.getUrl();
-        List<HttpParam> params = transfer.getParams();
+//        List<HttpParameter> params = transfer.getParams();
         
-        
-        
-        Object bodyParam = null;
-        for(int i = 0; i < params.size(); i++) {
-            HttpParam param = params.get(i);
-            if(param.getType() == 1 && args[i] != null) {
-                url = url.replace("{"  +  param.getName()+ "}", args[i].toString());
-            } else {
-                bodyParam = args[i];
+
+//        Object bodyParam = null;
+        List<HttpParameter> pathParams = transfer.getPathParmas();
+        for(int i = 0; i < pathParams.size(); i++) {
+            HttpParameter param = pathParams.get(i);
+
+            System.out.println("param : " + param);
+
+            if(args[i] != null) {
+
+                url = url.replace("{"  +  param.getName()+ "}", args[param.getIndex()].toString());
+
             }
         }
 
-        System.out.println("++++++ url : " + url);
-
-        try {
-            return comment.excute(url, bodyParam);
-        } catch (IOException e) {
-            e.printStackTrace();
+        HttpParameter bodyParam = transfer.getBodyParam();
+        byte[] bytes = null;
+        if(bodyParam != null ) {
+            MediaHandler producesHandler = transfer.getProducesHandler();
+            bytes = producesHandler.produce(args[bodyParam.getIndex()]);
         }
 
-//         String url = transfer.getUrl();
+        List<HttpParameter> formParams = transfer.getFormParmas();
+        Map<String, Object> map = new HashMap<String, Object>();
+        for(HttpParameter parameter : formParams) {
+            map.put(parameter.getName(), args[parameter.getIndex()]);
+        }
 
-         /*Map<String, Object> pathParams = transfer.getPathParams();
-
-         for(Map.Entry<String, Object> entry : pathParams.entrySet()) {
-             url = url.replace("{" + entry.getKey() + "}", entry.getValue().toString());
-         }*/
-
-
-        System.out.println(comment);
+        System.out.println(map);
+        if(!map.isEmpty()) {
+            MediaHandler producesHandler = transfer.getProducesHandler();
+            bytes = producesHandler.produce(map);
+        }
 
 
-        return null;
+
+        HttpResponse response = comment.execute(url, transfer.getProducesMediaType(),  bytes);
+
+        Class<?> resultType = transfer.getResultType();
+
+        MediaHandler consumesHandler = transfer.getConsumersHandler();
+
+        Object resultBean = consumesHandler.consume(response.getContent(), resultType);
+
+        return resultBean;
     }
 
 
-    private void doExcute(String url, Object bodyParams, String verb) {
-        switch (verb) {
-            case "get" :
-
-            case "post" :
-
-            default:
-                throw new IllegalArgumentException("un support verb : " + verb);
-        }
-    }
 }

@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
     <head>
-
+        <meta charset="UTF-8">
         <script src="jquery-1.10.2.js"></script>
         <script src="jquery.json.js"></script>
 
@@ -73,5 +74,10 @@
         <button id="post">post</button>
         <button id="delete">delete</button>
         <button id="put">put</button>
+
+    <form method="post" action="rbatis/blog/img" enctype="multipart/form-data" >
+        <input type="file" name="file">
+        <button type="submit">上传</button>
+    </form>
     </body>
 </html>

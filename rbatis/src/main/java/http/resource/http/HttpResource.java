@@ -10,7 +10,7 @@ public class HttpResource {
 
     private String id;
 
-    Map<String, HttpTransfer>  methodMap = new HashMap<>();
+    Map<String, HttpTransfer>  methodMap = new HashMap<String, HttpTransfer>();
 
     public String getId() {
         return id;

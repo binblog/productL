@@ -6,4 +6,14 @@
     <select id="selectBlog" resultType="domain.blog.Blog">
         select * from Blog where id = #{id}
     </select>
+
+    <select id="selectOn" resultType="domain.blog.Blog">
+        select * from Blog
+        <where>
+            id in
+            <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
 </mapper>

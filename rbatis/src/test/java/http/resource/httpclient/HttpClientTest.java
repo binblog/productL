@@ -2,26 +2,27 @@ package http.resource.httpclient;
 
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
  * Created by bin.liang on 2016/11/30.
  */
-public class DefaultClientTest {
+public class HttpClientTest {
 
     @Test
     public void testPingMethod() {
-        DefaultClient defaultClient = new DefaultClient();
-        try {
-            defaultClient.getMethod("http://localhost:8080/rbatis/blog/ping");
+        HttpClient defaultClient = new HttpClient();
+        try {   // 169.254.137.76
+            defaultClient.getMethod("http://127.0.0.1:8080/rbatis/blog/ping");
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
     }
 
     @Test
     public void testGetMethod() {
-        DefaultClient defaultClient = new DefaultClient();
+        HttpClient defaultClient = new HttpClient();
         try {
             defaultClient.getMethod("http://localhost:8080/rbatis/blog/1");
         } catch (IOException e) {
@@ -32,7 +33,7 @@ public class DefaultClientTest {
 
     @Test
     public void testPostMethod() {
-        DefaultClient defaultClient = new DefaultClient();
+        HttpClient defaultClient = new HttpClient();
 
         try {
             defaultClient.post("http://localhost:8080/rbatis/blog", "{\"title\":\"hello, service\"}");
@@ -43,7 +44,7 @@ public class DefaultClientTest {
 
     @Test
     public void testDeleteMethod() {
-        DefaultClient defaultClient = new DefaultClient();
+        HttpClient defaultClient = new HttpClient();
 
         try {
             defaultClient.delete("http://localhost:8080/rbatis/blog/1");
@@ -54,7 +55,7 @@ public class DefaultClientTest {
 
     @Test
     public  void testPut() {
-        DefaultClient defaultClient = new DefaultClient();
+        HttpClient defaultClient = new HttpClient();
 
         try {
             defaultClient.put("http://localhost:8080/rbatis/blog/1", "{\"title\":\"hello, I need put\"}");
@@ -62,4 +63,22 @@ public class DefaultClientTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public  void testPostFile() {
+
+//        System.out.println(System.getProperty("user.dir"));
+        File file = new File("1.png");
+        System.out.println(file.getAbsolutePath());
+
+        HttpClient defaultClient = new HttpClient();
+
+        try {
+            defaultClient.postFile("http://localhost:8080/rbatis/blog/attachment", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

@@ -1,11 +1,12 @@
 package http.resource.comment;
 
-import java.io.IOException;
+import http.resource.http.HttpResponse;
 
 /**
  * Created by bin on 2016/12/4.
  */
 public interface HttpComment {
 
-    String excute(String url, Object params) throws IOException;
+    HttpResponse execute(String url, String contentType, byte[] params) ;
+
 }

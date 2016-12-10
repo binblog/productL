@@ -1,5 +1,7 @@
-package http.resource.comment;
+package http.resource.comment.httpclient;
 
+import http.resource.comment.HttpComment;
+import http.resource.http.HttpResponse;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -13,38 +15,52 @@ import java.io.IOException;
 /**
  * Created by bin on 2016/12/4.
  */
-public class GetComment implements  HttpComment {
+public class GetComment implements HttpComment {
 
-    @Override
-    public String excute(String url, Object params) throws IOException {
+
+
+
+    public HttpResponse execute(String url, String contentType, byte[] params) {
         HttpGet httpGet = new HttpGet(url);
 
-        return execute(url, httpGet);
+        try {
+            return execute(url, httpGet);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return  null;
+        }
     }
 
-    private String execute(String url, HttpRequestBase requestBase) throws IOException {
+
+
+    private HttpResponse execute(String url, HttpRequestBase requestBase) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
 
         CloseableHttpResponse response1 = httpclient.execute(requestBase);
 
+
+        HttpResponse response = new HttpResponse();
         try {
-            System.out.println(response1.getStatusLine());
+
 
             HttpEntity entity1 = response1.getEntity();
             // do something useful with the response body   // �߼�����
 
 
-            String result = EntityUtils.toString(entity1);
+//            String result = EntityUtils.toString(entity1);
+
+            response.setCode(response1.getStatusLine().getStatusCode());
+            response.setContent(EntityUtils.toByteArray(entity1));
 
 
-
-            // and ensure it is fully consumed  �ر�
             EntityUtils.consume(entity1);
-            return      result;
+            return    response  ;
         } finally {
             response1.close();
         }
+
+
 
     }
 }
