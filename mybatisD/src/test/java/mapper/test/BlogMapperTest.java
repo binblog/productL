@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by bin.liang on 2016/11/22.
  */
-public class BlogTest {
+public class BlogMapperTest {
 
 
     @Test

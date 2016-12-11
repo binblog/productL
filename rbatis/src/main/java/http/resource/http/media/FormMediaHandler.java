@@ -1,13 +1,5 @@
 package http.resource.http.media;
 
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.util.EntityUtils;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
-
 /**
  * Created by bin.liang on 2016/12/10.
  */
@@ -16,7 +8,7 @@ public class FormMediaHandler implements  MediaHandler {
     public byte[] produce(Object e) {
 
 
-        if(e instanceof Map) {
+        /*if(e instanceof Map) {
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 
             Map<String, Object> map = (Map<String, Object>)e;
@@ -36,7 +28,7 @@ public class FormMediaHandler implements  MediaHandler {
                 e1.printStackTrace();
             }
 
-        }
+        }*/
 
 
 

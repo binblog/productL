@@ -17,7 +17,7 @@ public class HttpParameter {
 
     }
 
-    public static  HttpParameter newPathParameter(int index, String name) {
+    public static HttpParameter newPathParameter(int index, String name) {
         HttpParameter parameter = new HttpParameter();
         parameter.setName(name);
         parameter.setIndex(index);
@@ -25,14 +25,14 @@ public class HttpParameter {
         return parameter;
     }
 
-    public static  HttpParameter newBodyParameter(int index) {
+    public static HttpParameter newBodyParameter(int index) {
         HttpParameter parameter = new HttpParameter();
         parameter.setType(HttpParameterType.BODY_PARAMETER);
         parameter.setIndex(index);
         return parameter;
     }
 
-    public static  HttpParameter newFormParameter(int index, String name) {
+    public static HttpParameter newFormParameter(int index, String name) {
         HttpParameter parameter = new HttpParameter();
         parameter.setName(name);
         parameter.setType(HttpParameterType.FORM_PARAMETER);

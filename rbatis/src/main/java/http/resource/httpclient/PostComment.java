@@ -1,4 +1,4 @@
-package http.resource.comment.httpclient;
+package http.resource.httpclient;
 
 import http.resource.comment.HttpComment;
 import http.resource.http.HttpResponse;
@@ -18,11 +18,8 @@ import java.io.IOException;
  * Created by bin.liang on 2016/12/6.
  */
 public class PostComment implements HttpComment {
-
-
     @Override
     public HttpResponse execute(String url, String contentType, byte[] params) {
-        System.out.println(" contentType  "  + contentType);
 
         HttpEntityEnclosingRequestBase requestBase = new HttpPost(url);
 

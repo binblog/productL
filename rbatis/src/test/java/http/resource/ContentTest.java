@@ -3,9 +3,8 @@ package http.resource;
 
 import http.resource.example.domain.Blog;
 import http.resource.example.service.BlogService;
+import http.resource.httpclient.HttpClientBuilder;
 import org.junit.Test;
-
-import java.io.File;
 
 /**
  * Created by bin.liang on 2016/12/2.
@@ -16,12 +15,12 @@ public class ContentTest {
     public void test() {
 
         // resourceFactory
-        ResourceContent content = new ResourceContent();
+        ResourceContent content = new HttpClientBuilder().build();
 
-        content.setPreUrl("http://localhost:8080/rbatis/");
+        content.registerBaseUri("http://localhost:8080/rbatis/");
 
 
-        content.addClass(BlogService.class);
+        content.registerResource(BlogService.class);
 
         BlogService blogService = content.getResource(BlogService.class);
 
@@ -37,10 +36,12 @@ public class ContentTest {
         Blog blog = new Blog();
         blog.setTitle("中国");
 
-//        System.out.println(blogService.addBlog(blog));
-        File file = new File("1.png");
+
+//        File file = new File("1.png");
 //        blogService.uploadImg(file);
-        blogService.uploadAttachment(file, "1_upload.png");
+//        blogService.uploadAttachment(file, "1_upload.png");
+        
+        blogService.getBlog(1);
 
     }
 }

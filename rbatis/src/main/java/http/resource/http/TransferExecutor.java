@@ -49,8 +49,15 @@ public class TransferExecutor {
         HttpParameter bodyParam = transfer.getBodyParam();
         byte[] bytes = null;
         if(bodyParam != null ) {
-            MediaHandler producesHandler = transfer.getProducesHandler();
-            bytes = producesHandler.produce(args[bodyParam.getIndex()]);
+            MediaHandler[] producesHandlers = transfer.getProducesHandlers();
+            
+            for(MediaHandler handler : producesHandlers) {
+                if(handler != null) {
+                    bytes = handler.produce(args[bodyParam.getIndex()]);
+                    break;
+                }
+            }
+            
         }
 
         List<HttpParameter> formParams = transfer.getFormParmas();
@@ -59,21 +66,37 @@ public class TransferExecutor {
             map.put(parameter.getName(), args[parameter.getIndex()]);
         }
 
-        System.out.println(map);
+        String producesMediaType = null;
         if(!map.isEmpty()) {
-            MediaHandler producesHandler = transfer.getProducesHandler();
-            bytes = producesHandler.produce(map);
+            MediaHandler[] producesHandlers = transfer.getProducesHandlers();
+            
+            for(int i = 0; i < producesHandlers.length; i++) {
+                MediaHandler handler = producesHandlers[i];
+                if(handler != null) {
+                    bytes = handler.produce(map);
+                    producesMediaType = transfer.getProducesMediaType()[i];
+                    break;
+                }
+            }
         }
 
 
 
-        HttpResponse response = comment.execute(url, transfer.getProducesMediaType(),  bytes);
+        HttpResponse response = comment.execute(url, producesMediaType,  bytes);
 
         Class<?> resultType = transfer.getResultType();
 
-        MediaHandler consumesHandler = transfer.getConsumersHandler();
+        MediaHandler[] consumesHandler = transfer.getConsumersHandlers();
 
-        Object resultBean = consumesHandler.consume(response.getContent(), resultType);
+        Object resultBean = null;
+        for(MediaHandler handler : consumesHandler) {
+            if(handler != null) {
+                resultBean = handler.consume(response.getContent(), resultType);
+                break;
+            }
+            
+        }
+        
 
         return resultBean;
     }

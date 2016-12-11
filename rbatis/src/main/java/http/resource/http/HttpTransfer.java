@@ -2,8 +2,8 @@ package http.resource.http;
 
 import http.resource.http.media.MediaHandler;
 
-import javax.ws.rs.client.InvocationCallback;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,12 +18,12 @@ public class HttpTransfer {
     private List<HttpParameter> params = new ArrayList<HttpParameter>();
 
     private Class<?> resultType;
-    private MediaHandler consumersHandler;
-    private String consumersMediaType;
-    private MediaHandler producesHandler;
-    private String producesMediaType;
+    private MediaHandler[] consumersHandlers;
+    private String[] consumersMediaType;
+    private MediaHandler[] producesHandlers;
+    private String[] producesMediaType;
 
-    private InvocationCallback callback;
+//    private InvocationCallback callback;
 
 
     public TransferExecutor getExecutor() {
@@ -87,35 +87,49 @@ public class HttpTransfer {
         this.resultType = resultType;
     }
 
-    public MediaHandler getConsumersHandler() {
-        return consumersHandler;
+    public MediaHandler[] getConsumersHandlers() {
+        return consumersHandlers;
     }
 
-    public void setConsumersHandler(MediaHandler consumersHandler) {
-        this.consumersHandler = consumersHandler;
+    public void setConsumersHandlers(MediaHandler[] consumersHandlers) {
+        this.consumersHandlers = consumersHandlers;
     }
 
-    public MediaHandler getProducesHandler() {
-        return producesHandler;
+    public MediaHandler[] getProducesHandlers() {
+        return producesHandlers;
     }
 
-    public void setProducesHandler(MediaHandler producesHandler) {
-        this.producesHandler = producesHandler;
+    public void setProducesHandlers(MediaHandler[] producesHandlers) {
+        this.producesHandlers = producesHandlers;
     }
 
-    public String getConsumersMediaType() {
+    public String[] getConsumersMediaType() {
         return consumersMediaType;
     }
 
-    public void setConsumersMediaType(String consumersMediaType) {
+    public void setConsumersMediaType(String[] consumersMediaType) {
         this.consumersMediaType = consumersMediaType;
     }
 
-    public String getProducesMediaType() {
+    public String[] getProducesMediaType() {
         return producesMediaType;
     }
 
-    public void setProducesMediaType(String producesMediaType) {
+    public void setProducesMediaType(String[] producesMediaType) {
         this.producesMediaType = producesMediaType;
+    }
+
+    @Override
+    public String toString() {
+        return "HttpTransfer{" +
+                "url='" + url + '\'' +
+                ", executor=" + executor +
+                ", params=" + params +
+                ", resultType=" + resultType +
+                ", consumersHandlers=" + Arrays.toString(consumersHandlers) +
+                ", consumersMediaType=" + Arrays.toString(consumersMediaType) +
+                ", producesHandlers=" + Arrays.toString(producesHandlers) +
+                ", producesMediaType=" + Arrays.toString(producesMediaType) +
+                '}';
     }
 }

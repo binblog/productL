@@ -1,4 +1,4 @@
-package http.resource.comment.httpclient;
+package http.resource.httpclient;
 
 import http.resource.comment.HttpComment;
 import http.resource.http.HttpResponse;
