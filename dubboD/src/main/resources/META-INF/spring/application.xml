@@ -7,18 +7,32 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="base-service"  />
+    <dubbo:application name="dubbo-service"  />
 
-    <!-- 使用tomcat开放rest接口 -->
-    <dubbo:protocol name="rest" port="8888" threads="500" contextpath="services" server="tomcat" accepts="500"/>
+    <dubbo:registry address="zookeeper://54.70.215.146:2181" />
+
+    <dubbo:protocol name="dubbo" port="29115" />
+
+
+
+
+    <!-- 暴露服务配置 -->
+    <dubbo:monitor protocol="registry" />
+
 
 
 
     <!-- 定义接口实现类 -->
-    <bean id="echoService" class="com.dubbod.service.EchoServiceImpl"></bean>
+    <bean id="helloService" class="com.dubbod.service.HelloServiceImpl"></bean>
+    <!-- 声明需要暴露的服务接口 -->
+    <dubbo:service interface="com.dubbod.service.HelloService" ref="helloService" timeout="6000" protocol="dubbo"/>
+
+
+    <!-- 使用tomcat开放rest接口 -->
+    <dubbo:protocol name="rest" port="8888" threads="500" contextpath="services" server="tomcat" accepts="500"/>
+    <!-- 定义接口实现类 -->
+    <!--<bean id="echoService" class="com.dubbod.service.EchoServiceImpl"></bean>
     <dubbo:service  interface="com.dubbod.service.EchoService" ref="echoService"  protocol="rest" registry="N/A"/>
 
-    <dubbo:reference id="blogService" interface="com.dubbod.service.BlogService" url="rest://localhost:8080/rbatis/" registry="N/A"/>
-
-
+    <dubbo:reference id="blogService" interface="com.dubbod.service.BlogService" url="rest://localhost:8080/rbatis/" registry="N/A"/>-->
 </beans>

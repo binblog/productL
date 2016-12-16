@@ -43,7 +43,7 @@ public class DefaultResourceParser implements ResourceParser {
         for (Method method : methods) {
             HttpTransfer transfer = transferParser.parseTransfer(method, resourceUri);
 
-            logger.debug("parse transfer : " +  transfer);
+            logger.debug(this + " parse transfer : " +  transfer);
             
             resource.addTransfer(method.getName(), transfer);
         }

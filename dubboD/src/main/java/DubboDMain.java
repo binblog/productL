@@ -1,6 +1,3 @@
-import com.dubbod.service.BlogService;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 /**
  * Created by bin.liang on 2016/12/2.
  */
@@ -11,17 +8,17 @@ public class DubboDMain {
 
     public static void main( String[] args )
     {
-        System.setProperty("dubbo.application.logger", "slf4j");    // ¸æËßdubboÊ¹ÓÃslf4jÈÕÖ¾¿ò¼Ü
+        System.setProperty("dubbo.application.logger", "slf4j");    // ï¿½ï¿½ï¿½ï¿½dubboÊ¹ï¿½ï¿½slf4jï¿½ï¿½Ö¾ï¿½ï¿½ï¿½
 
-//        com.alibaba.dubbo.container.Main.main(args);
+        com.alibaba.dubbo.container.Main.main(args);
 
-        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[]{"classpath:META-INF/spring/application.xml"});
-
-        BlogService blogService = (BlogService)ctx.getBean("blogService");
-
-        System.out.println(blogService);
-
-        System.out.println(blogService.getBlog(1L));
+//        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[]{"classpath:META-INF/spring/application.xml"});
+//
+//        BlogService blogService = (BlogService)ctx.getBean("blogService");
+//
+//        System.out.println(blogService);
+//
+//        System.out.println(blogService.getBlog(1L));
 
 
     }

@@ -5,15 +5,15 @@ package http.resource.http.media;
  */
 public class PlainMediaHandler implements  MediaHandler {
     @Override
-    public byte[] produce(Object e) {
+    public BytesWrapper produce(Object e) {
         if(e == null || e.toString() == null) {
-            return new byte[0];
+            return null;
         }
-        return e.toString().getBytes();
+        return new BytesWrapper(e.toString().getBytes());
     }
 
     @Override
-    public <E> E consume(byte[] o, Class<E> clazz) {
-        return  (E)new String(o);
+    public <E> E consume(BytesWrapper o, Class<E> clazz) {
+        return  (E)new String(o.getBytes());
     }
 }

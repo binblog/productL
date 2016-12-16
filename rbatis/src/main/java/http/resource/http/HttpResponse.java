@@ -1,12 +1,14 @@
 package http.resource.http;
 
+import http.resource.http.media.BytesWrapper;
+
 /**
  * Created by bin.liang on 2016/12/5.
  */
 public class HttpResponse {
     private int code;
 
-    private byte[] content;
+    private BytesWrapper content;
 
     public int getCode() {
         return code;
@@ -17,11 +19,11 @@ public class HttpResponse {
     }
 
     public byte[] getContent() {
-        return content;
+        return content.getBytes();
     }
 
     public void setContent(byte[] content) {
-        this.content = content;
+        this.content = new BytesWrapper(content);
     }
 
     @Override

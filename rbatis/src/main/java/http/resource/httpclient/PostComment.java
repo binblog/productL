@@ -1,6 +1,7 @@
 package http.resource.httpclient;
 
 import http.resource.comment.HttpComment;
+import http.resource.comment.HttpRequest;
 import http.resource.http.HttpResponse;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -11,7 +12,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
-import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 
 /**
@@ -19,19 +19,19 @@ import java.io.IOException;
  */
 public class PostComment implements HttpComment {
     @Override
-    public HttpResponse execute(String url, String contentType, byte[] params) {
+    public HttpResponse execute(HttpRequest request) {
 
-        HttpEntityEnclosingRequestBase requestBase = new HttpPost(url);
+        HttpEntityEnclosingRequestBase requestBase = new HttpPost(request.getUrl());
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
 //        requestBase.setHeader("Content-Type", "application/json");
-        if(MediaType.APPLICATION_OCTET_STREAM.equals(contentType)) {
-            requestBase.setHeader("Content-Type", contentType);
-        }
+//        if(MediaType.APPLICATION_OCTET_STREAM.equals(contentType)) {
+//            requestBase.setHeader("Content-Type", contentType);
+//        }
 
 
 //        HttpEntity stringEntity = new StringEntity(json);
-        HttpEntity requestEntity = new ByteArrayEntity(params);
+        HttpEntity requestEntity = new ByteArrayEntity(request.getBytesWrapper().getBytes());
 
         requestBase.setEntity(requestEntity);
 

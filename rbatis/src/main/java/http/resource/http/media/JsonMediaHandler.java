@@ -18,10 +18,10 @@ public class JsonMediaHandler implements MediaHandler {
     }
 
     @Override
-    public byte[] produce(Object o) {
+    public BytesWrapper produce(Object o) {
         try {
             String s1 = mapper.writeValueAsString(o);
-            return s1.getBytes();
+            return new BytesWrapper(s1.getBytes());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;
@@ -29,9 +29,10 @@ public class JsonMediaHandler implements MediaHandler {
     }
 
     @Override
-    public <E> E consume(byte[] o, Class<E> clazz) {
+    public <E> E consume(BytesWrapper o, Class<E> clazz) {
         try {
-            String s = new String(o);
+
+            String s = new String(o.getBytes());
             return mapper.readValue(s, clazz);
         } catch (IOException e) {
             e.printStackTrace();

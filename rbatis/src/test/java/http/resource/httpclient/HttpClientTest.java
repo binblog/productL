@@ -15,7 +15,11 @@ public class HttpClientTest {
         HttpClient defaultClient = new HttpClient();
         try {   // 169.254.137.76
             defaultClient.getMethod("http://127.0.0.1:8080/rbatis/blog/ping");
-        } catch (IOException e) {
+
+            Thread.sleep(1000  * 3);
+
+            defaultClient.getMethod("http://127.0.0.1:8080/rbatis/blog/ping");
+        } catch (Exception e) {
 
         }
     }

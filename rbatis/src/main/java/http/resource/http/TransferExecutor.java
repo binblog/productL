@@ -2,6 +2,8 @@ package http.resource.http;
 
 
 import http.resource.comment.HttpComment;
+import http.resource.comment.HttpRequest;
+import http.resource.http.media.BytesWrapper;
 import http.resource.http.media.MediaHandler;
 
 import java.util.HashMap;
@@ -47,7 +49,7 @@ public class TransferExecutor {
         }
 
         HttpParameter bodyParam = transfer.getBodyParam();
-        byte[] bytes = null;
+        BytesWrapper bytes = null;
         if(bodyParam != null ) {
             MediaHandler[] producesHandlers = transfer.getProducesHandlers();
             
@@ -81,17 +83,24 @@ public class TransferExecutor {
         }
 
 
+        HttpRequest request = new HttpRequest();
+        request.setBytesWrapper(bytes);
+        request.setBytesWrapper(bytes);
+        request.setConsumersMediaType(transfer.getConsumersMediaType());
+        request.setProducesHandlers(transfer.getProducesHandlers());
 
-        HttpResponse response = comment.execute(url, producesMediaType,  bytes);
+        HttpResponse response = comment.execute(request);
 
         Class<?> resultType = transfer.getResultType();
 
         MediaHandler[] consumesHandler = transfer.getConsumersHandlers();
 
+
+
         Object resultBean = null;
-        for(MediaHandler handler : consumesHandler) {
+        for(MediaHandler handler : consumesHandler) {   //!!! 需要返回content-type处理返回的内容
             if(handler != null) {
-                resultBean = handler.consume(response.getContent(), resultType);
+                resultBean = handler.consume(new BytesWrapper(response.getContent()), resultType);
                 break;
             }
             

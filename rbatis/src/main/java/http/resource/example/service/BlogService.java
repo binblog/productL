@@ -4,6 +4,7 @@ import http.resource.example.domain.Blog;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.io.File;
 
 /**
  * Created by bin.liang on 2016/12/2.
@@ -23,10 +24,10 @@ public interface BlogService {
     void uploadImg(File img);*/
 
 
-//    @POST
-//    @Path("attachment")
-//    @Produces(MediaType.MULTIPART_FORM_DATA)
-//    String uploadAttachment(@FormParam("file") File file, @FormParam("name")String name);
+    @POST
+    @Path("attachment")
+    @Produces(MediaType.MULTIPART_FORM_DATA)
+    String uploadAttachment(@FormParam("file") File file, @FormParam("name")String name);
 
 
 //    @POST

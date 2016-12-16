@@ -7,6 +7,8 @@ import http.resource.http.HttpResponse;
  */
 public interface HttpComment {
 
-    HttpResponse execute(String url, String contentType, byte[] params);
+//    HttpResponse execute(String url, String contentType, byte[] params);
+
+    HttpResponse execute(HttpRequest request);
 
 }

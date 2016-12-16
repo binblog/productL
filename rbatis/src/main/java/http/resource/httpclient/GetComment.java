@@ -1,6 +1,7 @@
 package http.resource.httpclient;
 
 import http.resource.comment.HttpComment;
+import http.resource.comment.HttpRequest;
 import http.resource.http.HttpResponse;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -17,14 +18,11 @@ import java.io.IOException;
  */
 public class GetComment implements HttpComment {
 
-
-
-
-    public HttpResponse execute(String url, String contentType, byte[] params) {
-        HttpGet httpGet = new HttpGet(url);
+    public HttpResponse execute(HttpRequest request) {
+        HttpGet httpGet = new HttpGet(request.getUrl());
 
         try {
-            return execute(url, httpGet);
+            return execute(httpGet);
         } catch (IOException e) {
             e.printStackTrace();
             return  null;
@@ -33,7 +31,7 @@ public class GetComment implements HttpComment {
 
 
 
-    private HttpResponse execute(String url, HttpRequestBase requestBase) throws IOException {
+    private HttpResponse execute( HttpRequestBase requestBase) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
 
 

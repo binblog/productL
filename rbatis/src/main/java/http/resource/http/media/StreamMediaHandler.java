@@ -10,7 +10,7 @@ import java.io.*;
 public class StreamMediaHandler implements MediaHandler {
 
     @Override
-    public byte[] produce(Object o) {
+    public BytesWrapper produce(Object o) {
 
         if(o instanceof File) {
             try {
@@ -29,7 +29,7 @@ public class StreamMediaHandler implements MediaHandler {
                     while((l = instream.read(tmp)) != -1) {
                         buffer.append(tmp, 0, l);
                     }
-                    return buffer.toByteArray();
+                    return new BytesWrapper(buffer.toByteArray());
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -50,7 +50,7 @@ public class StreamMediaHandler implements MediaHandler {
     }
 
     @Override
-    public <E> E consume(byte[] o, Class<E> clazz) {
+    public <E> E consume(BytesWrapper o, Class<E> clazz) {
         return null;
     }
 }

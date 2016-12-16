@@ -2,7 +2,6 @@ package http.resource.httpclient;
 
 import http.resource.DefaultResourceContent;
 import http.resource.ResourceContent;
-import http.resource.http.media.FormMediaHandler;
 import http.resource.http.media.JsonMediaHandler;
 import http.resource.http.media.PlainMediaHandler;
 import http.resource.http.media.StreamMediaHandler;

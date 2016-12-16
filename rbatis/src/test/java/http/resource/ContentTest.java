@@ -6,6 +6,8 @@ import http.resource.example.service.BlogService;
 import http.resource.httpclient.HttpClientBuilder;
 import org.junit.Test;
 
+import java.io.File;
+
 /**
  * Created by bin.liang on 2016/12/2.
  */
@@ -37,11 +39,11 @@ public class ContentTest {
         blog.setTitle("中国");
 
 
-//        File file = new File("1.png");
+        File file = new File("1.png");
 //        blogService.uploadImg(file);
-//        blogService.uploadAttachment(file, "1_upload.png");
+        blogService.uploadAttachment(file, "1_upload.png");
         
-        blogService.getBlog(1);
+//        blogService.getBlog(1);
 
     }
 }
