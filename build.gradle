@@ -141,3 +141,23 @@ project(':jerseyD') {
 		)
 	}
 }
+
+
+project(':motanD') {
+	dependencies {
+		compile(
+				"com.weibo:motan-core:0.2.2",
+				"com.weibo:motan-transport-netty:0.2.2",
+				"com.weibo:motan-springsupport:0.2.2",
+				"org.springframework:spring-context:4.2.4.RELEASE",
+
+				"org.slf4j:slf4j-api:1.7.1",
+				"org.apache.logging.log4j:log4j-api:2.2",
+				"org.apache.logging.log4j:log4j-core:2.2",
+				"org.apache.logging.log4j:log4j-slf4j-impl:2.2",
+				"org.apache.logging.log4j:log4j-jcl:2.2",
+				"com.weibo:motan-registry-zookeeper:0.2.1"
+		)
+	}
+	
+}
