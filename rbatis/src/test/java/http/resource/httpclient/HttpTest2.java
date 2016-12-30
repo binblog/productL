@@ -25,6 +25,7 @@ import java.security.cert.CertificateException;
  */
 public class HttpTest2 {
 
+
     public static void main(String[] args) throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, KeyManagementException {
         String keyStoreFile = "C:/Users/bin.liang/Desktop/snakeoil2_070531/aaa.keystore";
         String password = "123456";

@@ -19,9 +19,6 @@
     <!-- 暴露服务配置 -->
     <dubbo:monitor protocol="registry" />
 
-
-
-
     <!-- 定义接口实现类 -->
     <bean id="helloService" class="com.dubbod.service.HelloServiceImpl"></bean>
     <!-- 声明需要暴露的服务接口 -->

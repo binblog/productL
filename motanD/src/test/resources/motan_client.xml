@@ -8,12 +8,12 @@
 
 
 
-    <motan:referer id="remoteService" interface="quickstart.FooService" directUrl="localhost:8002"/>
+    <!--<motan:referer id="remoteService" interface="quickstart.FooService" directUrl="localhost:8002"/>-->
     
-    <!--<motan:protocol name="motan" loadbalance="roundrobin" id="motan"/>
+    <motan:protocol name="motan" loadbalance="roundrobin" id="motan" haStrategy="" retries="2"/>
     
-    <motan:registry regProtocol="zookeeper" name="my_zookeeper"  address="54.70.215.146:2181,54.70.215.146:2180" connectTimeout="2000"/>
+    <motan:registry regProtocol="zookeeper" name="my_zookeeper"  address="127.0.0.1:2181" connectTimeout="6000"/>
     
     
-    <motan:referer id="remoteService" interface="quickstart.FooService" registry="my_zookeeper" protocol="motan"/>-->
+    <motan:referer id="remoteService" interface="quickstart.FooService" registry="my_zookeeper" protocol="motan"/>
 </beans>

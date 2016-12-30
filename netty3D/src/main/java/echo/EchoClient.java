@@ -1,14 +1,14 @@
 package echo;
 
-import java.net.InetSocketAddress;
-import java.util.concurrent.Executors;
-
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.ChannelFuture;
 import org.jboss.netty.channel.ChannelPipeline;
 import org.jboss.netty.channel.ChannelPipelineFactory;
 import org.jboss.netty.channel.Channels;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
+
+import java.net.InetSocketAddress;
+import java.util.concurrent.Executors;
 
 
 /**
@@ -52,22 +52,26 @@ public class EchoClient {
 
     public static void main(String[] args) throws Exception {
         // Print usage if no argument is specified.
-        if (args.length < 2 || args.length > 3) {
-            System.err.println(
-                    "Usage: " + EchoClient.class.getSimpleName() +
-                            " <host> <port> [<first message size>]");
-            return;
-        }
+//        if (args.length < 2 || args.length > 3) {
+//            System.err.println(
+//                    "Usage: " + EchoClient.class.getSimpleName() +
+//                            " <host> <port> [<first message size>]");
+//            return;
+//        }
+//
+//        // Parse options.
+//        final String host = args[0];
+//        final int port = Integer.parseInt(args[1]);
+//        final int firstMessageSize;
+//        if (args.length == 3) {
+//            firstMessageSize = Integer.parseInt(args[2]);
+//        } else {
+//            firstMessageSize = 256;
+//        }
 
-        // Parse options.
-        final String host = args[0];
-        final int port = Integer.parseInt(args[1]);
-        final int firstMessageSize;
-        if (args.length == 3) {
-            firstMessageSize = Integer.parseInt(args[2]);
-        } else {
-            firstMessageSize = 256;
-        }
+        String host = "127.0.0.1";
+        int port = 8080;
+        int firstMessageSize = 256;
 
         new EchoClient(host, port, firstMessageSize).run();
     }

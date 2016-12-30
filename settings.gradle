@@ -17,4 +17,4 @@ include 'services:webservice'
 */
 
 rootProject.name = 'productL'
-include 'core','nettyD','netty3D','mybatisD','rbatis','dubboD','jerseyD','motanD'
+include 'core','nettyD','netty3D','mybatisD','rbatis','dubboD','jerseyD','motanD','zkD','kafkaD'
